@@ -1,23 +1,22 @@
-
 {
   "overrides": {
-  "@ngrx/store": {
-    "@angular/core": "$@angular/core",
-    "@angular/common": "$@angular/common"
+    "@ngrx/store": {
+      "@angular/core": "$@angular/core",
+      "@angular/common": "$@angular/common"
+    },
+    "@ngrx/effects": {
+      "@angular/core": "$@angular/core",
+      "@angular/common": "$@angular/common"
+    },
+    "@ngrx/entity": {
+      "@angular/core": "$@angular/core",
+      "@angular/common": "$@angular/common"
+    },
+    "@ngrx/store-devtools": {
+      "@angular/core": "$@angular/core",
+      "@angular/common": "$@angular/common"
+    }
   },
-  "@ngrx/effects": {
-    "@angular/core": "$@angular/core",
-    "@angular/common": "$@angular/common"
-  },
-  "@ngrx/entity": {
-    "@angular/core": "$@angular/core",
-    "@angular/common": "$@angular/common"
-  },
-  "@ngrx/store-devtools": {
-    "@angular/core": "$@angular/core",
-    "@angular/common": "$@angular/common"
-  }
-},
   "name": "tekkendb",
   "version": "0.0.0",
   "scripts": {
@@ -25,7 +24,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "api": "npm start --prefix mock-api"
   },
   "private": true,
   "packageManager": "npm@11.17.0",
