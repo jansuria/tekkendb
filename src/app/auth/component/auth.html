@@ -1,1 +1,7 @@
 <p>auth works!</p>
+  <div class="flex flex-column gap-3">
+    <input pInputText type="email" [(ngModel)]="email" placeholder="Email" />
+
+    <input pInputText type="password" [(ngModel)]="password" placeholder="Password" />
+  </div>
+<button label="Sign Up" (click)="onSignUp()">Sign up</button>
