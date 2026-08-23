@@ -11,6 +11,7 @@ node_modules/
 /node_modules
 npm-debug.log
 yarn-error.log
+mock-api/db.json
 
 # IDEs and editors
 .idea/
