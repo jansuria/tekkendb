@@ -27,4 +27,22 @@ export class AuthEffects {
         )
     })
 
+    logInEffect = createEffect(()=> {
+        return this.actions$.pipe(
+            ofType(authActionTypes.logInRequest),
+            concatMap(({email,password})=> {
+                return from (this.authApi.logIn({email,password})).pipe(
+                    map((data)=>{
+                        return authActionTypes.logInSuccess({
+                            accessToken: data.accessToken,
+                            email: data.user.email,
+                            userId: data.user.id,
+                        })
+                    }),
+                    catchError((error) => of(authActionTypes.logInFailure({ error: error.message }))),
+                )
+            })
+        )
+    })
+
 }

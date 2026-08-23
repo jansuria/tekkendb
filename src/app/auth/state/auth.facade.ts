@@ -6,8 +6,12 @@ import * as authActionTypes from './auth.actions'
 export class AuthFacade {
     private readonly store = inject(Store);
 
-    public userSignup({email, password}: {email: string; password: string;}) {
+    public userSignUp({email, password}: {email: string; password: string;}) {
         this.store.dispatch(authActionTypes.signUpRequest({email, password}))
+    }
+
+    public userLogIn({email, password}: {email:string; password:string;}) {
+        this.store.dispatch(authActionTypes.logInRequest({email, password}))
     }
 
 }

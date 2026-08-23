@@ -17,6 +17,10 @@ email: any;
 password: any;
 
 onSignUp() {
-  this.authFacade.userSignup({email: this.email, password: this.password});
+  this.authFacade.userSignUp({email: this.email, password: this.password});
+}
+
+onLogIn() {
+  this.authFacade.userLogIn({email: this.email, password: this.password})
 }
 }
