@@ -10,17 +10,17 @@ import { AuthFacade } from '../state/auth.facade';
   templateUrl: './auth.html',
 })
 export class Auth {
-private readonly store = inject(Store);
-private readonly authFacade = inject(AuthFacade)
+  private readonly store = inject(Store);
+  private readonly authFacade = inject(AuthFacade);
 
-email: any;
-password: any;
+  email: any;
+  password: any;
 
-onSignUp() {
-  this.authFacade.userSignUp({email: this.email, password: this.password});
-}
+  onSignUp() {
+    this.authFacade.userSignUp({ email: this.email, password: this.password });
+  }
 
-onLogIn() {
-  this.authFacade.userLogIn({email: this.email, password: this.password})
-}
+  onLogIn() {
+    this.authFacade.userLogIn({ email: this.email, password: this.password });
+  }
 }
