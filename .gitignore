@@ -12,6 +12,7 @@ node_modules/
 npm-debug.log
 yarn-error.log
 mock-api/db.json
+mock-api/character-photos/
 
 # IDEs and editors
 .idea/

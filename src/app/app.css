@@ -1,0 +1,14 @@
+.character-rectangle {
+  margin-top: 1%;
+  width: 90%;
+  border: 4px solid #333;
+  background-color: transparent;
+  overflow: auto;
+}
+
+.main-rectangle {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  min-height: 90vh; 
+}

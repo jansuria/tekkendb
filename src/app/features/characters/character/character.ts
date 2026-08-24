@@ -11,6 +11,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 export class Character implements OnInit {
   private readonly characterFacade = inject(CharacterFacade);
   characters = this.characterFacade.characters$;
+
   ngOnInit(): void {
     this.characterFacade.loadCharacters();
   }

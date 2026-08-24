@@ -22,11 +22,20 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+
+
+
+              {
+                "glob": "**/*",
+                "input": "mock-api/character-photos",
+                "output": "character-photos"
               }
+
+
+              
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
