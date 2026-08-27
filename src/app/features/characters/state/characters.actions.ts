@@ -5,10 +5,12 @@ export const loadCharactersRequest = createAction('[CHARACTER] Load Characters R
 
 export const loadCharactersSuccess = createAction(
   '[CHARACTER] Load Characters Success',
-  props<{ characters: CharacterModel[] }>(),
+  props<{ characters: CharacterModel[]; isLoaded: boolean }>(),
 );
 
 export const loadCharactersFailure = createAction(
   '[CHARACTER] Load Characters Failure',
   props<{ error: string }>(),
 );
+
+export const loadCharactersSkipped = createAction('[CHARACTER] Load Characters Skipped (cached)');

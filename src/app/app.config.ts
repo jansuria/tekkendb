@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideOptimus } from '@openng/optimus-ui/config';
 import Aura from '@openng/optimus-ui-themes/aura';
@@ -14,7 +14,7 @@ import { characterReducer } from './features/characters/state/characters.reducer
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    provideRouter(routes, withComponentInputBinding()),
     provideStore({ auth: authReducer, character: characterReducer }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states

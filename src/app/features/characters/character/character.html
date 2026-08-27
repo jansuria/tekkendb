@@ -159,11 +159,10 @@
   }
 </style>
 
-@let characterList = (characters | async) ?? [];
 
 <div class="char-grid">
-  @for (character of characterList; track character.id) {
-    <div class="char-tile">
+  @for (character of characters(); track character.id) {
+    <div class="char-tile" [routerLink]="['/characters', character.id]">
       <div class="char-body">
         <div class="char-sheen"></div>
         <div class="char-glow"></div>
@@ -186,5 +185,5 @@
 <!-- for testign the data that arrives-->
 <!-- <details class="char-debug">
   <summary>Raw character data</summary>
-  <pre>{{ characterList | json }}</pre>
+  <pre>{{ characters() | json }}</pre>
 </details> -->

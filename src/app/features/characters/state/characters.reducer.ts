@@ -4,12 +4,14 @@ import { CharacterState } from '../model/characters.model';
 
 const initialState: CharacterState = {
   characters: [],
+  isLoaded: false,
 };
 
 export const characterReducer = createReducer(
   initialState,
-  on(characterActionTypes.loadCharactersSuccess, (state, { characters }) => ({
+  on(characterActionTypes.loadCharactersSuccess, (state, { characters, isLoaded }) => ({
     ...state,
     characters,
+    isLoaded,
   })),
 );

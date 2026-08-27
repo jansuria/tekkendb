@@ -6,7 +6,7 @@ import { selectAllCharacters } from './characters.selectors';
 @Injectable({ providedIn: 'root' })
 export class CharacterFacade {
   private readonly store = inject(Store);
-  public characters$ = this.store.select(selectAllCharacters);
+  public characters = this.store.selectSignal(selectAllCharacters);
 
   public loadCharacters() {
     this.store.dispatch(characterActionTypes.loadCharactersRequest());

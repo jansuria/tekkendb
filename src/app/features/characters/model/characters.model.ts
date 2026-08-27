@@ -6,4 +6,5 @@ export interface CharacterModel {
 
 export interface CharacterState {
   characters: CharacterModel[];
+  isLoaded: boolean;
 }
