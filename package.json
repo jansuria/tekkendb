@@ -44,6 +44,7 @@
     "@ngrx/store-devtools": "^21.1.1",
     "@openng/optimus-ui": "^2.0.1",
     "@openng/optimus-ui-themes": "^2.0.1",
+    "@supabase/supabase-js": "^2.112.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

@@ -13,6 +13,8 @@ npm-debug.log
 yarn-error.log
 mock-api/db.json
 mock-api/character-photos/
+.env
+src/environments/environment.ts
 
 # IDEs and editors
 .idea/

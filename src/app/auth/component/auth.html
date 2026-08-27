@@ -1,6 +1,10 @@
 <div class="flex-container">
+  @if (!isLoggedIn()) {
     <input pInputText type="email" [(ngModel)]="email" placeholder="Email" />
     <input pInputText type="password" [(ngModel)]="password" placeholder="Password" />
     <button label="Sign Up" (click)="onSignUp()">Sign up</button>
-  <button label="Sign Up" (click)="onLogIn()">Log in</button>
+    <button label="Sign Up" (click)="onLogIn()">Log in</button>
+  } @else if (isLoggedIn()) {
+    <button label="Sign Up" (click)="onSignOut()">Log out</button>
+  }
 </div>
