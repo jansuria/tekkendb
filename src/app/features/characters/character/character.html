@@ -159,29 +159,29 @@
   }
 </style>
 
+<div class="character-rectangle">
+  <div class="char-grid">
+    @for (character of characters(); track character.id) {
+      <div class="char-tile" [routerLink]="['/characters', character.id]">
+        <div class="char-body">
+          <div class="char-sheen"></div>
+          <div class="char-glow"></div>
 
-<div class="char-grid">
-  @for (character of characters(); track character.id) {
-    <div class="char-tile" [routerLink]="['/characters', character.id]">
-      <div class="char-body">
-        <div class="char-sheen"></div>
-        <div class="char-glow"></div>
+          <div class="char-portrait">
+            <img [src]="character.photoLocation" />
+          </div>
 
-        <div class="char-portrait">
-          <img [src]="character.photoLocation">
+          <div class="char-text">
+            <div class="char-number">№ {{ character.id }}</div>
+            <div class="char-name">{{ character.name }}</div>
+          </div>
+
+          <div class="char-edge"></div>
         </div>
-
-        <div class="char-text">
-          <div class="char-number">№ {{ character.id }}</div>
-          <div class="char-name">{{ character.name }}</div>
-        </div>
-
-        <div class="char-edge"></div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </div>
-
 <!-- for testign the data that arrives-->
 <!-- <details class="char-debug">
   <summary>Raw character data</summary>
