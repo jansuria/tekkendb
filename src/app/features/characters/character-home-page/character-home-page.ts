@@ -13,4 +13,8 @@ export class CharacterHomePage {
   id = input.required({ transform: numberAttribute });
 
   character = computed(() => this.characterFacade.characters().find((c) => c.id === this.id()));
+
+  frameDataRequest() {
+    this.characterFacade.loadCharacterMovesById(this.id());
+  }
 }

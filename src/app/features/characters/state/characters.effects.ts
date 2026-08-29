@@ -4,7 +4,7 @@ import { CharacterService } from '../../../services/characters/character.service
 import * as characterActionTypes from './characters.actions';
 import { catchError, filter, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { selectCharacterIsLoaded } from './characters.selectors';
+import { selectCharacterIsLoaded, selectCharacterMovesIsLoaded } from './characters.selectors';
 
 @Injectable()
 export class CharacterEffects {
@@ -22,14 +22,35 @@ export class CharacterEffects {
         }
         return from(this.characterApi.getCharacters()).pipe(
           map((data) => {
-            console.log(data);
             return characterActionTypes.loadCharactersSuccess({
               characters: data,
-              isLoaded: true,
+              isCharacterLoaded: true,
             });
           }),
           catchError((error) =>
             of(characterActionTypes.loadCharactersFailure({ error: error.message })),
+          ),
+        );
+      }),
+    );
+  });
+  loadCharacterMovesById = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(characterActionTypes.loadCharacterMovesByIdRequest),
+      withLatestFrom(this.store.select(selectCharacterMovesIsLoaded)),
+      switchMap(([actionWeRequested, loaded]) => {
+        if (loaded) {
+          return of(characterActionTypes.loadCharactersSkipped());
+        }
+        return from(this.characterApi.getCharacterById(actionWeRequested.characterId)).pipe(
+          map((data) => {
+            return characterActionTypes.loadCharacterMovesByIdSuccess({
+              characterMoves: data,
+              isCharacterMovesLoaded: true,
+            });
+          }),
+          catchError((error) =>
+            of(characterActionTypes.loadCharacterMovesByIdFailure({ error: error.message })),
           ),
         );
       }),

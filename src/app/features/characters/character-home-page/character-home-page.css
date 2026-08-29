@@ -3,7 +3,15 @@
 }
 
 .info-rectangle {
-  border: 4px solid #333;
-  background-color: transparent;
-  overflow: auto;
+  width: 600px;
+  height: 150px;
+  border: 2px solid #333;
+  box-sizing: border-box; /* now it's exactly 300×150 */
+  margin: 0 auto;
+}
+
+.rectangle-text {
+    font-family: 'IBM Plex Mono', monospace;
+  font-size: 44px;
+  font-weight: 700;
 }

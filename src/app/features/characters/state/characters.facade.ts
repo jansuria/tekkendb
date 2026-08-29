@@ -11,4 +11,8 @@ export class CharacterFacade {
   public loadCharacters() {
     this.store.dispatch(characterActionTypes.loadCharactersRequest());
   }
+
+  public loadCharacterMovesById(characterId: number) {
+    this.store.dispatch(characterActionTypes.loadCharacterMovesByIdRequest({ characterId }));
+  }
 }

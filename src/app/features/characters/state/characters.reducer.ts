@@ -4,14 +4,24 @@ import { CharacterState } from '../model/characters.model';
 
 const initialState: CharacterState = {
   characters: [],
-  isLoaded: false,
+  isCharacterLoaded: false,
+  characterMoves: [],
+  isCharacterMovesLoaded: false,
 };
 
 export const characterReducer = createReducer(
   initialState,
-  on(characterActionTypes.loadCharactersSuccess, (state, { characters, isLoaded }) => ({
+  on(characterActionTypes.loadCharactersSuccess, (state, { characters, isCharacterLoaded }) => ({
     ...state,
     characters,
-    isLoaded,
+    isCharacterLoaded,
   })),
+  on(
+    characterActionTypes.loadCharacterMovesByIdSuccess,
+    (state, { characterMoves, isCharacterMovesLoaded }) => ({
+      ...state,
+      characterMoves,
+      isCharacterMovesLoaded,
+    }),
+  ),
 );

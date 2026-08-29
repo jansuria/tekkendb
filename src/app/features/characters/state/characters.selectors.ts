@@ -10,10 +10,10 @@ export const selectAllCharacters = createSelector(
 
 export const selectCharacterIsLoaded = createSelector(
   selectCharacterState,
-  (state) => state.isLoaded,
+  (state) => state.isCharacterLoaded,
 );
 
-// export const selectCharacterById = (characterId: number) => createSelector(
-//   selectAllCharacters,
-//   (character) => cha
-// )
+export const selectCharacterMovesIsLoaded = createSelector(
+  selectCharacterState,
+  (state) => state.isCharacterMovesLoaded,
+);
