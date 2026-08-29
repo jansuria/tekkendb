@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+
+.info-rectangle {
+  border: 4px solid #333;
+  background-color: transparent;
+  overflow: auto;
+}
