@@ -1,12 +1,17 @@
-:host {
-  display: block;
-}
+  :host {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+  }
 
-.character-rectangle {
-  border: 4px solid #333;
-  background-color: transparent;
-  overflow: auto;
-}
+  .character-rectangle {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
+    border: 4px solid #333;
+    background-color: transparent;
+  }
 
 .char-grid {
   --rest-opacity: 0.45;
@@ -19,7 +24,7 @@
 }
 .char-tile {
   position: relative;
-  width: 335px;
+  width: 300px;
   height: 95px;
   padding: 2px;
   background: linear-gradient(

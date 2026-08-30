@@ -1,9 +1,11 @@
 <p-toolbar>
-  <ng-template #start> </ng-template>
+  <ng-template #start>
+    <img src="tekkendb.png" class="tekken-logo"/>
+  </ng-template>
   <ng-template #end>
     <app-auth></app-auth>
   </ng-template>
 </p-toolbar>
 <div class="main-rectangle">
-    <router-outlet />
+  <router-outlet />
 </div>

@@ -1,8 +1,20 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
 .main-rectangle {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   width: 90%;
-  margin: 1% auto 0;
-  min-height: 90vh;
+  margin: 1% auto;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.tekken-logo {
+  max-width: 200px;
+  height: auto;
 }
