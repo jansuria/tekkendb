@@ -1,17 +1,49 @@
 :host {
-  display: block;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-stack {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
 }
 
 .info-rectangle {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   height: 150px;
   border: 2px solid #333;
-  box-sizing: border-box; /* now it's exactly 300×150 */
-  margin: 0 auto;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 24px;
+
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.info-rectangle:hover {
+  border-color: #ff4426;
+  background-color: rgba(255, 68, 38, 0.08);
 }
 
 .rectangle-text {
-    font-family: 'IBM Plex Mono', monospace;
-  font-size: 44px;
-  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #333;
 }

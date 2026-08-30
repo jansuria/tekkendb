@@ -1,8 +1,9 @@
-import { Component, computed, inject, input, numberAttribute } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { CharacterFacade } from '../state/characters.facade';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-character-home-page',
   styleUrl: './character-home-page.css',
   templateUrl: './character-home-page.html',
@@ -13,8 +14,4 @@ export class CharacterHomePage {
   id = input.required({ transform: numberAttribute });
 
   character = computed(() => this.characterFacade.characters().find((c) => c.id === this.id()));
-
-  frameDataRequest() {
-    this.characterFacade.loadCharacterMovesById(this.id());
-  }
 }

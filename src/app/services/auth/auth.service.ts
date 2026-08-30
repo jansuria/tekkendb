@@ -1,44 +1,30 @@
 import { Injectable } from '@angular/core';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { environment } from '../../../environments/environment';
 
-interface SignUpLoginBody {
-  email: string;
-  password: string;
-}
-
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
-  async signUp(signUpUserData: SignUpLoginBody) {
-    const response = await fetch(' http://localhost:3000/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(signUpUserData),
-    });
+  private supabase: SupabaseClient;
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
+  constructor() {
+    this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
+  }
+  async signUp({ email, password }: { email: string; password: string }) {
+    const { data, error } = await this.supabase.auth.signUp({ email, password });
+    if (error) throw error;
     return data;
   }
 
-  async logIn(logInUserData: SignUpLoginBody) {
-    const response = await fetch(' http://localhost:3000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(logInUserData),
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    const data = await response.json();
-    console.log(data);
+  async signIn({ email, password }: { email: string; password: string }) {
+    const { data, error } = await this.supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
     return data;
+  }
+
+  async signOut() {
+    const { error } = await this.supabase.auth.signOut();
+    if (error) throw error;
   }
 }

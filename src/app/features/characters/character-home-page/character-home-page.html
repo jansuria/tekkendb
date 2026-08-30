@@ -1,17 +1,20 @@
-<div class="info-rectangle">
-    <div class="rectangle-text" (click)="frameDataRequest()">
-    Move List & Frame Data
-    </div>
+<link
+  href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<div class="info-stack">
+  <div class="info-rectangle" [routerLink]="['/characters', id(), 'framedata']">
+    <div class="rectangle-text">Move List &amp; Frame Data</div>
+  </div>
+
+  <div class="info-rectangle">
+    <div class="rectangle-text">{{ character()?.name }} Tech</div>
+  </div>
+
+  <div class="info-rectangle">
+    <div class="rectangle-text">Match Up Info</div>
+  </div>
 </div>
 
-<div class="info-rectangle">
-    <div class="rectangle-text">
-    {{character()?.name}} Tech
-    </div>
-</div>
-
-<div class="info-rectangle">
-    <div class="rectangle-text">
-    Match Up Info
-    </div>
-</div>
+<pre>{{id()}}</pre>
