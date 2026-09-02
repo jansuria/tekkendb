@@ -17,12 +17,20 @@ export const loadCharactersSkipped = createAction('[CHARACTER] Load Characters S
 
 export const loadCharacterMovesByIdRequest = createAction(
   '[MOVES] Character Moves Request',
-  props<{ characterId: number }>(),
+  props<{ characterId: number; characterName: string }>(),
 );
 
 export const loadCharacterMovesByIdSuccess = createAction(
   '[MOVES] Character Moves Success',
-  props<{ characterMoves: CharacterMoves[]; isCharacterMovesLoaded: boolean }>(),
+  props<{
+    characterId: number;
+    isThisCharacterMovesLoaded: boolean;
+    characterMoves: CharacterMoves['Moves'];
+  }>(),
+);
+
+export const loadCharacterMovesSkipped = createAction(
+  '[MMOVES] Load Character Moves Skipped (cached)',
 );
 
 export const loadCharacterMovesByIdFailure = createAction(

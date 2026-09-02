@@ -1,12 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import * as characterActionTypes from './characters.actions';
-import { CharacterState } from '../model/characters.model';
+import { CharacterState, CharacterMoves } from '../model/characters.model';
 
 const initialState: CharacterState = {
   characters: [],
   isCharacterLoaded: false,
-  characterMoves: [],
-  isCharacterMovesLoaded: false,
 };
 
 export const characterReducer = createReducer(
@@ -18,10 +16,16 @@ export const characterReducer = createReducer(
   })),
   on(
     characterActionTypes.loadCharacterMovesByIdSuccess,
-    (state, { characterMoves, isCharacterMovesLoaded }) => ({
+    (state, { characterId, characterMoves, isThisCharacterMovesLoaded }) => ({
       ...state,
-      characterMoves,
-      isCharacterMovesLoaded,
+      characters: state.characters.map((character) =>
+        character.id === characterId
+          ? {
+              ...character,
+              characterMoves: [{ isThisCharacterMovesLoaded, Moves: characterMoves }],
+            }
+          : character,
+      ),
     }),
   ),
 );

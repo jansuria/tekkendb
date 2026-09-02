@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, numberAttribute } from '@angular/core';
+import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { CharacterFacade } from '../state/characters.facade';
 
 @Component({
@@ -10,8 +10,9 @@ import { CharacterFacade } from '../state/characters.facade';
 export class CharacterFrameData {
   private readonly characterFacade = inject(CharacterFacade);
   id = input.required({ transform: numberAttribute });
+  character = computed(() => this.characterFacade.characters().find((c) => c.id === this.id()));
 
   constructor() {
-    effect(() => this.characterFacade.loadCharacterMovesById(this.id()));
+    effect(() => this.characterFacade.loadCharacterMovesById(this.id(), this.character()!.name));
   }
 }

@@ -2,9 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CharacterService } from '../../../services/characters/character.service';
 import * as characterActionTypes from './characters.actions';
-import { catchError, filter, from, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, filter, from, map, Observable, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectCharacterIsLoaded, selectCharacterMovesIsLoaded } from './characters.selectors';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable()
 export class CharacterEffects {
@@ -37,16 +38,25 @@ export class CharacterEffects {
   loadCharacterMovesById = createEffect(() => {
     return this.actions$.pipe(
       ofType(characterActionTypes.loadCharacterMovesByIdRequest),
-      withLatestFrom(this.store.select(selectCharacterMovesIsLoaded)),
+      concatLatestFrom((action) =>
+        this.store.select(selectCharacterMovesIsLoaded(action.characterId)),
+      ),
       switchMap(([actionWeRequested, loaded]) => {
         if (loaded) {
           return of(characterActionTypes.loadCharactersSkipped());
         }
-        return from(this.characterApi.getCharacterById(actionWeRequested.characterId)).pipe(
+        return from(
+          this.characterApi.getCharacterById(
+            actionWeRequested.characterId,
+            actionWeRequested.characterName,
+          ),
+        ).pipe(
           map((data) => {
+            console.log(data);
             return characterActionTypes.loadCharacterMovesByIdSuccess({
+              characterId: actionWeRequested.characterId,
+              isThisCharacterMovesLoaded: true,
               characterMoves: data,
-              isCharacterMovesLoaded: true,
             });
           }),
           catchError((error) =>

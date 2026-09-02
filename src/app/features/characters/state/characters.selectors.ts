@@ -13,7 +13,10 @@ export const selectCharacterIsLoaded = createSelector(
   (state) => state.isCharacterLoaded,
 );
 
-export const selectCharacterMovesIsLoaded = createSelector(
-  selectCharacterState,
-  (state) => state.isCharacterMovesLoaded,
-);
+export const selectCharacterMovesIsLoaded = (characterId: number) =>
+  createSelector(
+    selectAllCharacters,
+    (character) =>
+      character.find((character) => character.id === characterId)?.characterMoves?.[0]
+        ?.isThisCharacterMovesLoaded ?? false,
+  );

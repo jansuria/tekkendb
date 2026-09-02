@@ -12,7 +12,9 @@ export class CharacterFacade {
     this.store.dispatch(characterActionTypes.loadCharactersRequest());
   }
 
-  public loadCharacterMovesById(characterId: number) {
-    this.store.dispatch(characterActionTypes.loadCharacterMovesByIdRequest({ characterId }));
+  public loadCharacterMovesById(characterId: number, characterName: string) {
+    this.store.dispatch(
+      characterActionTypes.loadCharacterMovesByIdRequest({ characterId, characterName }),
+    );
   }
 }

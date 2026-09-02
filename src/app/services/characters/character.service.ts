@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CharacterModel, CharacterMoves } from '../../features/characters/model/characters.model';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
+// import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CharacterService {
@@ -18,7 +19,7 @@ export class CharacterService {
       .order('name');
 
     if (error) throw error;
-    return (data ?? []).map((row) => ({
+    return data.map((row) => ({
       id: row.id,
       name: row.name,
       slug: row.slug,
@@ -26,20 +27,24 @@ export class CharacterService {
       imagePath: row.image_path
         ? this.supabase.storage.from('character-images').getPublicUrl(row.image_path).data.publicUrl
         : null,
+      characterMoves: null,
     }));
   }
 
-  async getCharacterById(characterId: number): Promise<CharacterMoves[]> {
+  async getCharacterById(
+    characterId: number,
+    characterName: string,
+  ): Promise<CharacterMoves['Moves']> {
     const { data, error } = await this.supabase
       .from('moves')
       .select(
-        'id, num, name, input, target, damage, startup, block, hit, resolved_input, resolved_target, resolved_damage, startup_frames, parent_id',
+        'character_id, id, num, name, input, target, damage, startup, block, hit, resolved_input, resolved_target, resolved_damage, startup_frames, parent_id',
       )
       .eq('character_id', characterId)
       .order('id');
 
     if (error) throw error;
-    return (data ?? []).map((row) => ({
+    return data.map((row) => ({
       id: row.id,
       num: row.num,
       name: row.name,
