@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CharacterModel, CharacterMoves } from '../../features/characters/model/characters.model';
+import { CharacterModel, Move } from '../../features/characters/model/characters.model';
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { environment } from '../../../environments/environment';
 // import { environment } from '../../../environments/environment';
@@ -31,10 +31,7 @@ export class CharacterService {
     }));
   }
 
-  async getCharacterById(
-    characterId: number,
-    characterName: string,
-  ): Promise<CharacterMoves['Moves']> {
+  async getCharacterMovesById(characterId: number): Promise<Move[]> {
     const { data, error } = await this.supabase
       .from('moves')
       .select(

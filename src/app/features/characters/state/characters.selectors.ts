@@ -1,7 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CharacterState } from '../model/characters.model';
+import { CharacterMoves, CharacterState } from '../model/characters.model';
 
 export const selectCharacterState = createFeatureSelector<CharacterState>('character');
+
+export const selectCharacterMovesState = createFeatureSelector<CharacterMoves>('characterMoves');
 
 export const selectAllCharacters = createSelector(
   selectCharacterState,
@@ -10,13 +12,15 @@ export const selectAllCharacters = createSelector(
 
 export const selectCharacterIsLoaded = createSelector(
   selectCharacterState,
-  (state) => state.isCharacterLoaded,
+  (state) => state.areCharacterLoaded,
+);
+
+export const selectCharacterMoves = createSelector(
+  selectCharacterMovesState,
+  (state) => state.characterMoves,
 );
 
 export const selectCharacterMovesIsLoaded = (characterId: number) =>
-  createSelector(
-    selectAllCharacters,
-    (character) =>
-      character.find((character) => character.id === characterId)?.characterMoves?.[0]
-        ?.isThisCharacterMovesLoaded ?? false,
+  createSelector(selectCharacterMoves, (sets) =>
+    sets.some((set) => set.characterId === characterId),
   );

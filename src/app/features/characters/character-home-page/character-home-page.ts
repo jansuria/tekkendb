@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
+import { Component, computed, inject, input, numberAttribute } from '@angular/core';
 import { CharacterFacade } from '../state/characters.facade';
 import { RouterLink } from '@angular/router';
 

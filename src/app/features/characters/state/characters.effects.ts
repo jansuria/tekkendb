@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { CharacterService } from '../../../services/characters/character.service';
 import * as characterActionTypes from './characters.actions';
-import { catchError, filter, from, map, Observable, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, from, map, of, switchMap, withLatestFrom } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { selectCharacterIsLoaded, selectCharacterMovesIsLoaded } from './characters.selectors';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -25,7 +25,7 @@ export class CharacterEffects {
           map((data) => {
             return characterActionTypes.loadCharactersSuccess({
               characters: data,
-              isCharacterLoaded: true,
+              areCharacterLoaded: true,
             });
           }),
           catchError((error) =>
@@ -41,21 +41,15 @@ export class CharacterEffects {
       concatLatestFrom((action) =>
         this.store.select(selectCharacterMovesIsLoaded(action.characterId)),
       ),
-      switchMap(([actionWeRequested, loaded]) => {
+      switchMap(([props, loaded]) => {
         if (loaded) {
-          return of(characterActionTypes.loadCharactersSkipped());
+          return of(characterActionTypes.loadCharacterMovesSkipped());
         }
-        return from(
-          this.characterApi.getCharacterById(
-            actionWeRequested.characterId,
-            actionWeRequested.characterName,
-          ),
-        ).pipe(
+        return from(this.characterApi.getCharacterMovesById(props.characterId)).pipe(
           map((data) => {
             console.log(data);
             return characterActionTypes.loadCharacterMovesByIdSuccess({
-              characterId: actionWeRequested.characterId,
-              isThisCharacterMovesLoaded: true,
+              characterId: props.characterId,
               characterMoves: data,
             });
           }),

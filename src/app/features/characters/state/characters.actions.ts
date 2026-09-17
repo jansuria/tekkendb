@@ -1,11 +1,11 @@
 import { createAction, props } from '@ngrx/store';
-import { CharacterModel, CharacterMoves } from '../model/characters.model';
+import { CharacterModel, Move } from '../model/characters.model';
 
 export const loadCharactersRequest = createAction('[CHARACTER] Load Characters Request');
 
 export const loadCharactersSuccess = createAction(
   '[CHARACTER] Load Characters Success',
-  props<{ characters: CharacterModel[]; isCharacterLoaded: boolean }>(),
+  props<{ characters: CharacterModel[]; areCharacterLoaded: boolean }>(),
 );
 
 export const loadCharactersFailure = createAction(
@@ -17,20 +17,19 @@ export const loadCharactersSkipped = createAction('[CHARACTER] Load Characters S
 
 export const loadCharacterMovesByIdRequest = createAction(
   '[MOVES] Character Moves Request',
-  props<{ characterId: number; characterName: string }>(),
+  props<{ characterId: number }>(),
 );
 
 export const loadCharacterMovesByIdSuccess = createAction(
   '[MOVES] Character Moves Success',
   props<{
     characterId: number;
-    isThisCharacterMovesLoaded: boolean;
-    characterMoves: CharacterMoves['Moves'];
+    characterMoves: Move[];
   }>(),
 );
 
 export const loadCharacterMovesSkipped = createAction(
-  '[MMOVES] Load Character Moves Skipped (cached)',
+  '[MOVES] Load Character Moves Skipped (cached)',
 );
 
 export const loadCharacterMovesByIdFailure = createAction(

@@ -9,13 +9,20 @@ import { authReducer } from './auth/state/auth.reducer';
 import { AuthEffects } from './auth/state/auth.effects';
 import { provideEffects } from '@ngrx/effects';
 import { CharacterEffects } from './features/characters/state/characters.effects';
-import { characterReducer } from './features/characters/state/characters.reducer';
+import {
+  characterMovesReducer,
+  characterReducer,
+} from './features/characters/state/characters.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
-    provideStore({ auth: authReducer, character: characterReducer }),
+    provideStore({
+      auth: authReducer,
+      character: characterReducer,
+      characterMoves: characterMovesReducer,
+    }),
     provideStoreDevtools({
       maxAge: 25, // Retains last 25 states
       logOnly: !isDevMode(), // Restrict extension to log-only mode

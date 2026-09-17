@@ -2,30 +2,34 @@ import { createReducer, on } from '@ngrx/store';
 import * as characterActionTypes from './characters.actions';
 import { CharacterState, CharacterMoves } from '../model/characters.model';
 
-const initialState: CharacterState = {
+const initialCharacterState: CharacterState = {
   characters: [],
-  isCharacterLoaded: false,
+  areCharacterLoaded: false,
 };
 
-export const characterReducer = createReducer(
-  initialState,
-  on(characterActionTypes.loadCharactersSuccess, (state, { characters, isCharacterLoaded }) => ({
-    ...state,
-    characters,
-    isCharacterLoaded,
-  })),
+const initialCharacterMovesState: CharacterMoves = {
+  characterMoves: [],
+};
+
+export const characterMovesReducer = createReducer(
+  initialCharacterMovesState,
   on(
     characterActionTypes.loadCharacterMovesByIdSuccess,
-    (state, { characterId, characterMoves, isThisCharacterMovesLoaded }) => ({
+    (state, { characterId, characterMoves }) => ({
       ...state,
-      characters: state.characters.map((character) =>
-        character.id === characterId
-          ? {
-              ...character,
-              characterMoves: [{ isThisCharacterMovesLoaded, Moves: characterMoves }],
-            }
-          : character,
-      ),
+      characterMoves: [
+        ...state.characterMoves.filter((set) => set.characterId !== characterId),
+        { characterId, Moves: characterMoves },
+      ],
     }),
   ),
+);
+
+export const characterReducer = createReducer(
+  initialCharacterState,
+  on(characterActionTypes.loadCharactersSuccess, (state, { characters, areCharacterLoaded }) => ({
+    ...state,
+    characters,
+    areCharacterLoaded,
+  })),
 );
