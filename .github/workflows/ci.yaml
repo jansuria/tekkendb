@@ -5,7 +5,7 @@ run-name: ${{ github.actor }} has initiated the run.
 on: [push]
 
 jobs:
-  Pushing to develop:
+  Pushing-To-Repo:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
