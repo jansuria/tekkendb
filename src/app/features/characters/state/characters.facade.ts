@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as characterActionTypes from './characters.actions';
-import { selectAllCharacters } from './characters.selectors';
+import { selectAllCharacters, selectCharacterMoves } from './characters.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class CharacterFacade {
   private readonly store = inject(Store);
   public characters = this.store.selectSignal(selectAllCharacters);
+  public characterMoves = this.store.selectSignal(selectCharacterMoves);
 
   public loadCharacters() {
     this.store.dispatch(characterActionTypes.loadCharactersRequest());

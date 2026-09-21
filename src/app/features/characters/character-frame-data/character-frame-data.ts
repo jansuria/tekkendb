@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, input, numberAttribute } from '@angular/core';
 import { CharacterFacade } from '../state/characters.facade';
 import { TableModule } from '@openng/optimus-ui/table';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 
 @Component({
   imports: [TableModule],
@@ -13,10 +14,11 @@ export class CharacterFrameData {
   id = input.required({ transform: numberAttribute });
   character = computed(() => this.characterFacade.characters().find((c) => c.id === this.id()));
   characterMoves = computed(() =>
-    this.characterFacade.characters().find((c) => c.id === this.id()),
+    this.characterFacade.characterMoves().find((c) => c.characterId === this.id()),
   );
 
   constructor() {
     effect(() => this.characterFacade.loadCharacterMovesById(this.id()));
+    effect(() => this.characterFacade.loadCharacters());
   }
 }
