@@ -1,2 +1,36 @@
-<p>character-frame-data works!</p>
-<p-table></p-table>
+<p>{{ character()!.name }}'s Move List</p>
+<p-table [value]="characterMoves()!.Moves">
+  <ng-template #header>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Input</th>
+      <th>Hit Level</th>
+      <th>Startup Frames</th>
+      <th>Damage</th>
+    </tr>
+  </ng-template>
+  <ng-template #body let-move>
+    <tr>
+      <td>
+        {{ move.id }}
+      </td>
+      <td>
+        {{ move.name }}
+      </td>
+      <td>
+        {{ move.input }}
+      </td>
+      <td>
+        {{ move.target }}
+      </td>
+      <td>
+        {{ move.startupFrames }}
+      </td>
+      <td>
+        {{ move.damage }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<!-- <pre>{{ characterMoves()?.Moves | json }}</pre> -->
